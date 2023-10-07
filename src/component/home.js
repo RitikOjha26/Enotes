@@ -14,7 +14,8 @@ const Home = () => {
 
   const user = useSelector(selectUser);
   const newUser = useSelector(registerUser);
-  const notes = useSelector(userNotes);
+  const notes = useSelector((state) => state.notes);
+  //console.log(notes);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -53,7 +54,6 @@ const Home = () => {
         <div className="flex flex-col w-56 border-r border-gray-800">
           <button className="relative text-sm focus:outline-none group">
             <div className="flex items-center justify-between w-full h-16 px-4 border-b border-gray-800 hover:bg-gray-800">
-
               <span className="font-medium">
                 E Notes
               </span>
@@ -63,13 +63,19 @@ const Home = () => {
           </button>
           <div className="flex flex-col flex-grow p-4 overflow-auto">
             <div className="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-800" href="#">
-              <span className="leading-none">Note 1</span>
+              {notes.map((note, index) => (
+                <button
+                  key={index}
+                  className='leading-none'
+                  onClick={()=>{setTitle(note.title)}}
+                >{note.title}</button>
+              ))}
             </div>
 
             <div className="flex items-center flex-shrink-0 h-10 px-3 mt-auto text-sm font-medium bg-gray-800 rounded hover:bg-gray-700"
               href="#">
               <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
               <span className="ml-2 leading-none">Add Note</span>
             </div>
@@ -83,7 +89,7 @@ const Home = () => {
             <button className="relative ml-2 text-sm focus:outline-none group">
               <div className="flex items-center justify-between w-10 h-10 rounded hover:bg-gray-800">
                 <svg className="w-5 h-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                 </svg>
               </div>
               <div className="absolute right-0 flex-col items-start hidden w-40 mt-1 pb-1 bg-gray-800 border border-gray-800 shadow-lg group-focus:flex">
@@ -99,7 +105,7 @@ const Home = () => {
 
               <textarea
                 rows="1"
-                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Title"
+                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Title"
                 onChange={(e) => {
                   setTitle(e.target.value)
                 }}
@@ -108,7 +114,7 @@ const Home = () => {
 
               <textarea
                 rows="20"
-                class="block mt-3 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Description"
+                className="block mt-3 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Description"
                 onChange={(e) => {
                   setDescription(e.target.value)
 

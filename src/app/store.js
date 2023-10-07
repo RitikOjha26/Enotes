@@ -2,22 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "../features/userslice"
 import useRegisterReducer  from "../features/registerslice";
 import useNotesReducer from "../features/notes.slice"
-
+import notesData from "../app/notesData";
+import userData from "../app/userData"
 const preloadedState = {
-    newuser:{
-        name:null,
-        email:null,
-        password:null,
-    },
-    user: {
-        email: null,
-        password: null,
-        loggedIn:false,
-    },
-    notes:{
-        title:null,
-        description:null,
-    }
+    newuser:userData,
+    user: userData,
+    notes:notesData,
 };
 const store = configureStore({
     reducer:{

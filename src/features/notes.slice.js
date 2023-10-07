@@ -1,13 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import notesdata from "../app/notesData"
 
-
-export const notesSlice = createSlice({
+const notesSlice = createSlice({
     name : "notes",
-    initialState:
-    {
-        title:null,
-        description:null,
-    },
+    initialState: notesdata,
     reducers:{
         addNote:(state,action) =>{
             state.title=action.payload.title;
@@ -22,7 +18,7 @@ export const notesSlice = createSlice({
 
 export const {addNote,deleteNote} = notesSlice.actions;
 
-export const userNotes = (state) => state.notes;
+
 
 export default notesSlice.reducer;
 
