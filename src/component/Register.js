@@ -9,20 +9,22 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isValid, setIsValid] = useState(false);
-
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleRegisterClick = () => {
 
     navigate("/");
   };
+
   const handleSignIn = () => {
     if (name === "" || email === "" || password === "") {
       alert("Fill all the Credentials");
     } else if (!isValid) {
       alert("Enter a valid email address");
     } else {
-      navigate('/home');
+
+      console.log("good");
     }
   };
   const isValidEmail = (value) => {
@@ -30,23 +32,21 @@ const Register = () => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     setIsValid(emailRegex.test(value));
   }
-  const dispatch = useDispatch();
+  
   function handleSubmit(event) {
     event.preventDefault();
 
     dispatch(
-      signIn({
-        name: name,
-        email: email,
-        password: password,
-        loggedIn: true,
-      }))
+      signIn({ name, email, password })
+      )
+      navigate("/home")
 
   }
+  
   return (
 
     <div>
-      
+
       {/* For Registeration Menu */}
 
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -74,11 +74,10 @@ const Register = () => {
                 <input id="email"
                   name="email"
                   type="email"
-                  onChange={(e) => 
-                    {
+                  onChange={(e) => {
                     setEmail(e.target.value)
                     isValidEmail(e.target.value)
-                    }
+                  }
                   }
                   value={email}
                   autoComplete="email" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />

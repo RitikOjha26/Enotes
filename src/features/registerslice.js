@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-//import { selectUser, userSlice } from "./userslice";
+
 export const regisSlice = createSlice({
     name : "newuser",
     initialState:{
         name:null,
         email:null,
         password:null,
-        loggedIn:false
+        loggedIn:false,
     },
     reducers:{
         signIn:(state,action)=>{
